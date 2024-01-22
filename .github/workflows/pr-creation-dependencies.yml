@@ -1,0 +1,14 @@
+name: Pull Request Creation for dependencies
+on:  
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+      - '*'
+      - '!LICENSE'
+      - '!*.md'
+
+jobs:
+  call-workflow-dependencies:
+    uses: ./.github/workflows/pr-creation.yml

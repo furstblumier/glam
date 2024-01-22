@@ -1,12 +1,6 @@
 name: Pull Request Creation
 on:  
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'assets/**.css'
-      - 'layouts/_default/**'
-      - 'partials/*.html'
+  workflow_call:
 
 jobs:
   pr-creation:
@@ -51,7 +45,7 @@ jobs:
         run: hugo server -s exampleSite/ --themesDir=../.. --disableFastRender &
 
       - name: Take screenshots
-        uses: flameddd/screenshots-ci-action@v1.1.1
+        uses: flameddd/screenshots-ci-action@v2.1.0
         with:
           url: http://localhost:1313
           devices: iPhone X
@@ -68,7 +62,7 @@ jobs:
           echo ${{ github.event.number }} > ./screenshots/PR_NR
 
       - name: Upload Screenshots
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: screenshots/
